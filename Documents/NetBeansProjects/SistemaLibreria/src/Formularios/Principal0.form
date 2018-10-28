@@ -149,10 +149,13 @@
                 <Property name="text" type="java.lang.String" value="Reporte Clientes"/>
               </Properties>
             </MenuItem>
-            <MenuItem class="javax.swing.JMenuItem" name="jMenuItem19">
+            <MenuItem class="javax.swing.JMenuItem" name="mnUsuarios">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Reporte Usuarios"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="mnUsuariosActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

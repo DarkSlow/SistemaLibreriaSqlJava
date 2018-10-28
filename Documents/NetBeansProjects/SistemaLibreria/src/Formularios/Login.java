@@ -7,6 +7,7 @@ package Formularios;
 
 import Atxy2k.CustomTextField.RestrictedTextField;
 import Clases.Conexion;
+import Clases.Logueo;
 import com.sun.awt.AWTUtilities;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -26,6 +27,7 @@ public class Login extends javax.swing.JDialog {
     Connection conex;
     PreparedStatement ps;
     ResultSet rs;
+    Logueo log;
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
@@ -53,14 +55,15 @@ public class Login extends javax.swing.JDialog {
     private boolean encontrarUsuario() {
         boolean encontrado = false;
         try {
+            log = new Logueo(txtUsuario.getText().trim(), txtContraseña.getText().trim());
             String sql = "SELECT dniAdm, pass FROM logueo WHERE dniAdm=?";
             con = new Conexion();
             conex = con.getConnection();
             ps = conex.prepareStatement(sql);
-            ps.setString(1, txtUsuario.getText().trim());
+            ps.setString(1, log.getDni());
             rs = ps.executeQuery();
             while (rs.next()) {
-                if (txtUsuario.getText().trim().equals(rs.getString("dniAdm")) && txtContraseña.getText().trim().equals(rs.getString("pass"))) {
+                if ((log.getDni().equals(rs.getString("dniAdm"))) && (log.getPass().equals(rs.getString("pass")))) {
                     encontrado = true;
                 }
             }

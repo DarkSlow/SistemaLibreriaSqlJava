@@ -5,17 +5,29 @@
  */
 package Formularios;
 
+import Clases.Conexion;
+import java.sql.Connection;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.util.JRLoader;
+import net.sf.jasperreports.view.JasperViewer;
+
 /**
  *
  * @author Simon_PC
  */
 public class Principal0 extends javax.swing.JFrame {
 
-    /**
-     * Creates new form Principal0
-     */
+    JasperReport reporte;
+    JasperViewer vista;
+    JasperPrint print; 
+    Conexion con = new Conexion();
+    Connection conex ;
+    
     public Principal0() {
         initComponents();
+        setTitle("Sistema Libreria");
         this.setLocationRelativeTo(this);
     }
 
@@ -55,7 +67,7 @@ public class Principal0 extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem19 = new javax.swing.JMenuItem();
+        mnUsuarios = new javax.swing.JMenuItem();
         jMenu5 = new javax.swing.JMenu();
         jMenuItem18 = new javax.swing.JMenuItem();
 
@@ -166,8 +178,13 @@ public class Principal0 extends javax.swing.JFrame {
         jMenuItem5.setText("Reporte Clientes");
         jMenu3.add(jMenuItem5);
 
-        jMenuItem19.setText("Reporte Usuarios");
-        jMenu3.add(jMenuItem19);
+        mnUsuarios.setText("Reporte Usuarios");
+        mnUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                mnUsuariosActionPerformed(evt);
+            }
+        });
+        jMenu3.add(mnUsuarios);
 
         jMenuBar1.add(jMenu3);
 
@@ -202,6 +219,21 @@ public class Principal0 extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem9ActionPerformed
 
+    private void mnUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mnUsuariosActionPerformed
+        imprimirUsuarios();
+    }//GEN-LAST:event_mnUsuariosActionPerformed
+    private void imprimirUsuarios(){
+        try {
+            conex = con.getConnection();
+            String ruta = "src\\Reportes\\UsuarioReport.jasper";
+            reporte = (JasperReport)JRLoader.loadObjectFromFile(ruta);
+            print = JasperFillManager.fillReport(reporte,null, conex);
+            vista = new JasperViewer(print,false);
+            vista.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+            vista.setVisible(true);
+        } catch (Exception e) {
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -258,7 +290,6 @@ public class Principal0 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem16;
     private javax.swing.JMenuItem jMenuItem17;
     private javax.swing.JMenuItem jMenuItem18;
-    private javax.swing.JMenuItem jMenuItem19;
     private javax.swing.JMenuItem jMenuItem2;
     private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
@@ -268,5 +299,6 @@ public class Principal0 extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem8;
     private javax.swing.JMenuItem jMenuItem9;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JMenuItem mnUsuarios;
     // End of variables declaration//GEN-END:variables
 }

@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="971e8cba-49e8-4c2c-84c8-b8b875100ed9">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+     logueo."pass" AS logueo_pass,
+     datosAdm."dniAdm" AS datosAdm_dniAdm,
+     datosAdm."nombre" AS datosAdm_nombre,
+     datosAdm."apellidos" AS datosAdm_apellidos,
+     datosAdm."edad" AS datosAdm_edad,
+     datosAdm."sexo" AS datosAdm_sexo,
+     datosAdm."cargo" AS datosAdm_cargo
+FROM
+     "dbo"."datosAdm" datosAdm INNER JOIN "dbo"."logueo" logueo ON datosAdm."dniAdm" = logueo."dniAdm"
+ORDER BY datosAdm."apellidos"]]>
+	</queryString>
+	<field name="logueo_pass" class="java.lang.String"/>
+	<field name="datosAdm_dniAdm" class="java.lang.String"/>
+	<field name="datosAdm_nombre" class="java.lang.String"/>
+	<field name="datosAdm_apellidos" class="java.lang.String"/>
+	<field name="datosAdm_edad" class="java.lang.Integer"/>
+	<field name="datosAdm_sexo" class="java.lang.String"/>
+	<field name="datosAdm_cargo" class="java.lang.String"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch">
+			<image>
+				<reportElement x="0" y="-16" width="149" height="95" uuid="f56929b4-599f-4dea-b347-0b1bb4ec8d96"/>
+				<imageExpression><![CDATA["C:\\Users\\Simon_PC\\Documents\\NetBeansProjects\\SistemaLibreria\\src\\Iconos\\loggin.png"]]></imageExpression>
+			</image>
+			<staticText>
+				<reportElement x="146" y="21" width="309" height="31" uuid="fac9a310-42fa-4967-9aee-7b5a61cf0b7b"/>
+				<textElement>
+					<font size="24" isBold="true" isUnderline="true"/>
+				</textElement>
+				<text><![CDATA[REPORTE DE USUARIOS]]></text>
+			</staticText>
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="455" y="32" width="100" height="20" uuid="5c4e0505-4b94-467d-880e-3a24b8f2e015"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="2" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="22" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="81" height="20" uuid="e44169cf-20ff-4df8-9d1e-24f0aeea70b7"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Dni]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="170" y="0" width="107" height="20" uuid="c64aafdd-1bfb-4c29-a70f-96f21e042f76"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Apellidos]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="277" y="0" width="89" height="20" uuid="7ef8afaf-29de-402c-b2d0-b9feb5fd8aef"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Nombre]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="366" y="0" width="41" height="20" uuid="210fbf6a-2bf2-4be3-8697-b8c8c5651154"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Edad]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="407" y="0" width="76" height="20" uuid="6bfb3d7f-a7c4-4ba0-bf77-966025311f14"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Genero]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="483" y="0" width="72" height="20" uuid="40853479-8733-4455-bc17-3ac96dec810a"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Cargo]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="81" y="0" width="89" height="20" uuid="cc8e8fb9-9ce0-4f8b-99cc-bb531a893615"/>
+				<textElement>
+					<font size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Contraseña]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="25" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="81" height="20" uuid="00e84801-261b-4845-b177-d366452e2b1a"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_dniAdm}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="170" y="0" width="107" height="20" uuid="9f06fb54-638c-4bb6-9d4a-4467dc7de885"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_apellidos}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="277" y="0" width="89" height="20" uuid="2821bd4c-193f-469c-882e-cf020cbee6d1"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_nombre}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="366" y="0" width="41" height="20" uuid="66aa5ada-0c5e-459d-acbe-421d82e3017b"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_edad}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="407" y="0" width="76" height="20" uuid="5191eb96-72c9-4c95-9e35-e941d196814a"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_sexo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="483" y="0" width="72" height="20" uuid="95248ce7-de91-40cd-a9e1-6594052db2f0"/>
+				<textFieldExpression><![CDATA[$F{datosAdm_cargo}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="81" y="0" width="89" height="20" uuid="dd0cd5da-1823-4c52-a189-d90cb6fd4bba"/>
+				<textFieldExpression><![CDATA[$F{logueo_pass}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="2" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="21" splitType="Stretch">
+			<textField>
+				<reportElement x="266" y="0" width="100" height="20" uuid="93ffe291-db4c-4313-a60a-4dbc2dcf8d74"/>
+				<textFieldExpression><![CDATA[$V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="222" y="0" width="100" height="20" uuid="b6520684-00eb-4482-b1b8-67a1e8385871"/>
+				<text><![CDATA[PAGINA]]></text>
+			</staticText>
+		</band>
+	</pageFooter>
+	<summary>
+		<band height="2" splitType="Stretch"/>
+	</summary>
+</jasperReport>
