@@ -44,6 +44,7 @@ public class Login extends javax.swing.JDialog {
     }
 
     void limpiarCajas() {
+        //Limpiar
         txtUsuario.setText("");
         txtContraseña.setText("");
         txtUsuario.requestFocus();
