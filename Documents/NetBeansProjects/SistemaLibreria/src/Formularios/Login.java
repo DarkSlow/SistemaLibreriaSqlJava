@@ -28,14 +28,38 @@ public class Login extends javax.swing.JDialog {
     PreparedStatement ps;
     ResultSet rs;
     Logueo log;
+    Principal0 princ;
 
     public Login(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
-
         initComponents();
         AWTUtilities.setWindowOpaque(this, false);
         limitarCajaUser();
         this.setLocationRelativeTo(null);
+    }
+
+    void ponerData() {
+        princ = new Principal0();
+        try {
+            String sql = "SELECT da.dniAdm,lo.dniAdm, nombre,apellidos, edad, sexo, cargo "
+                    + "FROM datosAdm da ,logueo lo "
+                    + "WHERE da.dniAdm = lo.dniAdm";
+            con = new Conexion();
+            conex = con.getConnection();
+            ps = conex.prepareStatement(sql);
+            rs = ps.executeQuery();
+            while (rs.next()) {
+                if (encontrarUsuario()) {
+                    princ.lblDatosDel.setText("Datos del " + rs.getString("cargo") + " :");
+                    princ.lblNombre.setText(rs.getString("nombre"));
+                    princ.lblApellido.setText(rs.getString("apellidos"));
+                    princ.lblEdad.setText(String.valueOf(rs.getInt("edad")));
+                    princ.lblGenero.setText(rs.getString("sexo"));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     void limitarCajaUser() {
@@ -55,8 +79,10 @@ public class Login extends javax.swing.JDialog {
     private boolean encontrarUsuario() {
         boolean encontrado = false;
         try {
-            log = new Logueo(txtUsuario.getText().trim(), txtContraseña.getText().trim());
-            String sql = "SELECT dniAdm, pass FROM logueo WHERE dniAdm=?";
+            String user = txtUsuario.getText().trim();
+            String pass = String.valueOf(txtContraseña.getPassword());
+            log = new Logueo(user, pass);
+            String sql = "SELECT * FROM logueo WHERE dniAdm=?";
             con = new Conexion();
             conex = con.getConnection();
             ps = conex.prepareStatement(sql);
@@ -64,10 +90,12 @@ public class Login extends javax.swing.JDialog {
             rs = ps.executeQuery();
             while (rs.next()) {
                 if ((log.getDni().equals(rs.getString("dniAdm"))) && (log.getPass().equals(rs.getString("pass")))) {
+                    ponerData();
                     encontrado = true;
                 }
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return encontrado;
     }
